@@ -16,9 +16,8 @@
 package com.lewscanon.lessons.littlealgorithm.swapper;
 
 import java.lang.reflect.Method;
+import java.util.logging.Logger;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -28,24 +27,23 @@ import com.lewscanon.lessons.littlealgorithm.Swapper.Pair;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Test the {@link XorSwapper}.
+ * Test the {@link TimesSwapper}.
  */
-public class XorSwapperNGTest
+public class TimesSwapperNGTest
 {
     private static final String DATAP = "provider";
 
-    private final Logger logger = LogManager.getLogger(getClass().getSimpleName());
-    private final Provider provider = new Provider(logger);
+    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     /**
-     * Test swap method of {@link XorSwapper}.
+     * Test of swap method, of class XorSwapper.
      *
-     * @param pair {@link Pair} to test.
+     * @param pair Pair to test.
      */
     @Test(dataProvider = DATAP)
     public void testSwap(Pair pair)
     {
-        Swapper swapper = new XorSwapper();
+        Swapper swapper = new TimesSwapper();
 
         Pair swappee = new Pair(pair.left, pair.right);
         Pair expected = new Pair(pair.right, pair.left);
@@ -57,6 +55,16 @@ public class XorSwapperNGTest
     @DataProvider(name = DATAP)
     Object[][] provideData(Method test)
     {
-        return provider.provideData(test);
+        final Object[][] data = new Object[][]
+        {
+            { new Pair(17, 89) },
+            { new Pair(0, 1) },
+            { new Pair(1, 0) },
+            { new Pair(0, 0) },
+            { new Pair(-1, 1) },
+            { new Pair(Integer.MAX_VALUE / 2 + 1, Integer.MAX_VALUE / 2) },
+            { new Pair(Integer.MIN_VALUE / 2 + 1, Integer.MIN_VALUE / 2) },
+        };
+        return data;
     }
 }
