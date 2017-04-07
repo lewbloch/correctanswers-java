@@ -1,6 +1,5 @@
 /*
- * This package and all types herein,
- * Copyright 2016, Lewis S. Bloch.
+ * Copyright 2017, Lewis S. Bloch.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.lewscanon.lessons.algorithms;
+
+import java.util.Collection;
+
 /**
- * Take a little algorithm often pushed as an "interview answer", and look at 
- * what we really can learn by using it.
+ *
+ * @author Lew
  */
-package com.lewscanon.lessons.littlealgorithm;
+public class AbstractSorter<E extends Comparable<E>, T extends Collection<E>>
+{
+    
+}

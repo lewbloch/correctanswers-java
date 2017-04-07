@@ -1,5 +1,5 @@
 /*
- * Copyright 2016, Lewis S. Bloch.
+ * Copyright 2017, Lewis S. Bloch.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lewscanon.lessons.littlealgorithm.swapper;
-
-import com.lewscanon.lessons.littlealgorithm.Swapper;
-
 /**
- * {@code Swapper} using XOR.
+ * Algorithm studies.
  */
-public class XorSwapper implements Swapper
-{
-    @Override
-    public void swap(Pair pair)
-    {
-        pair.left ^= pair.right;
-        pair.right ^= pair.left;
-        pair.left ^= pair.right;
-    }    
-}
+package com.lewscanon.lessons.algorithms;

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lewscanon.lessons.littlealgorithm.swapper;
+package com.lewscanon.lessons.swapper.swappers;
 
 import java.lang.reflect.Method;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import com.lewscanon.lessons.littlealgorithm.Swapper;
+import com.lewscanon.lessons.swapper.Swapper;
 
-import static com.lewscanon.lessons.littlealgorithm.Swapper.Pair;
+import static com.lewscanon.lessons.swapper.Swapper.Pair;
 
 /**
  * Data providers available to all.

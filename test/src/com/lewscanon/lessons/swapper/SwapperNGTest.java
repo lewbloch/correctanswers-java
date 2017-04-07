@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lewscanon.lessons.littlealgorithm;
+package com.lewscanon.lessons.swapper;
+
+import com.lewscanon.lessons.swapper.Swapper;
 
 import java.lang.reflect.Method;
 
@@ -23,11 +25,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-import com.lewscanon.lessons.littlealgorithm.Swapper.Pair;
-import com.lewscanon.lessons.littlealgorithm.swapper.PlusSwapper;
-import com.lewscanon.lessons.littlealgorithm.swapper.Provider;
-import com.lewscanon.lessons.littlealgorithm.swapper.TimesSwapper;
-import com.lewscanon.lessons.littlealgorithm.swapper.XorSwapper;
+import com.lewscanon.lessons.swapper.Swapper.Pair;
+import com.lewscanon.lessons.swapper.swappers.PlusSwapper;
+import com.lewscanon.lessons.swapper.swappers.Provider;
+import com.lewscanon.lessons.swapper.swappers.TimesSwapper;
+import com.lewscanon.lessons.swapper.swappers.XorSwapper;
 
 import static org.testng.Assert.assertEquals;
 
@@ -48,29 +50,6 @@ public class SwapperNGTest
 
     private final Swapper swapper;
 
-    /**
-     * Test instance factory.
-     */
-    @SuppressWarnings("PublicInnerClass")
-    public static class Generator
-    {
-        /**
-         * Test instance factory method.
-         *
-         * @return Object[] test instances, each with a different {@link Swapper} to test.
-         */
-        @Factory
-        public Object[] generateTests()
-        {
-            final Object[] tests =
-            {
-                new SwapperNGTest(new XorSwapper()),
-                new SwapperNGTest(new PlusSwapper()),
-                new SwapperNGTest(new TimesSwapper()),
-            };
-            return tests;
-        }
-    }
 
     /**
      * Constructor with {@link Swapper} to test.

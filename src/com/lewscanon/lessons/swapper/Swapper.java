@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lewscanon.lessons.littlealgorithm;
+package com.lewscanon.lessons.swapper;
 
 /**
  * SAM for a {@code swap} method.

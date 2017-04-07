@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lewscanon.lessons.littlealgorithm.swapper;
+package com.lewscanon.lessons.swapper.swappers;
+
+import com.lewscanon.lessons.swapper.swappers.PlusSwapper;
 
 import java.lang.reflect.Method;
 import java.util.logging.Logger;
@@ -21,8 +23,8 @@ import java.util.logging.Logger;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.lewscanon.lessons.littlealgorithm.Swapper;
-import com.lewscanon.lessons.littlealgorithm.Swapper.Pair;
+import com.lewscanon.lessons.swapper.Swapper;
+import com.lewscanon.lessons.swapper.Swapper.Pair;
 
 import static org.testng.Assert.assertEquals;
 

@@ -1,4 +1,5 @@
 /*
+ * This package and all types herein,
  * Copyright 2016, Lewis S. Bloch.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,20 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lewscanon.lessons.littlealgorithm.swapper;
-
-import com.lewscanon.lessons.littlealgorithm.Swapper;
-
 /**
- * {@link Swapper} using additive operators.
+ * Take a little algorithm often pushed as an "interview answer", and look at 
+ * what we really can learn by using it.
  */
-public class PlusSwapper implements Swapper
-{
-    @Override
-    public void swap(Pair pair)
-    {
-        pair.left += pair.right;
-        pair.right = pair.left - pair.right;
-        pair.left -= pair.right;
-    }    
-}
+package com.lewscanon.lessons.swapper;

@@ -14,11 +14,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'>
-<suite name="Swapper Suite">
-  <test name="Swapper Tests">
-    <classes>
-      <class name="XorSwapperNGTest" />
-    </classes>
-  </test>
-</suite>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{30} - %msg%n"/>
+    </Console>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="com.lewscanon.lessons" level="info" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+    <Root level="warn">
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>

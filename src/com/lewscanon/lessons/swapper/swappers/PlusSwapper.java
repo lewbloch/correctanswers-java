@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lewscanon.lessons.littlealgorithm.swapper;
+package com.lewscanon.lessons.swapper.swappers;
 
-import com.lewscanon.lessons.littlealgorithm.Swapper;
+import com.lewscanon.lessons.swapper.Swapper;
 
 /**
  * {@link Swapper} using additive operators.
  */
-public class TimesSwapper implements Swapper
+public class PlusSwapper implements Swapper
 {
     @Override
     public void swap(Pair pair)
     {
-        pair.left *= pair.right;
-        pair.right = pair.left / pair.right;
-        pair.left /= pair.right;
+        pair.left += pair.right;
+        pair.right = pair.left - pair.right;
+        pair.left -= pair.right;
     }    
 }
