@@ -23,7 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Binary {@link Sorter}.
+ * Quicksort {@link Sorter}.
  *
  * @param <E> element type of collection to sort.
  */
