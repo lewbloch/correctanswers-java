@@ -50,7 +50,7 @@ public class QuickSort<E extends Comparable<E>> implements Sorter<E, List<E>>
     @Override
     public List<E> sort(List<E> list)
     {
-        List<E> result = new ArrayList(list);
+        List<E> result = new ArrayList<>(list);
         quickSort(result);
 
         logger.info("{}", list);
