@@ -31,6 +31,20 @@ public class QuickSort<E extends Comparable<E>> implements Sorter<E, List<E>>
 {
     private static final String LOHI = "{[{}], [{}]}";
 
+    /** Pair of indexes. */
+    static class Pair
+    {
+        /** "Low" index. */
+        final int lox;
+        /** "High" index. */
+        final int hix;
+        Pair(int lox, int hix)
+        {
+            this.lox = lox;
+            this.hix = hix;
+        }
+    }
+
     final Logger logger = LogManager.getLogger(getClass());
 
     @Override
@@ -39,65 +53,97 @@ public class QuickSort<E extends Comparable<E>> implements Sorter<E, List<E>>
         List<E> result = new ArrayList(list);
         quickSort(result);
 
-        logger.info("sorted\n");
         logger.info("{}", list);
+        logger.info("sorted");
         logger.info("{}\n", result);
         return result;
     }
 
-    void quickSort(List<E> list)
+    /**
+     * Quicksort algorithm, using {@link List}'s own indexes {@code 0} and {@code size()} to
+     * initialize the low and high indexes traditionally seen as arguments.
+     *
+     * @param list of {@code E} items to sort.
+     */
+    List<E> quickSort(List<E> list)
     {
         final int size = list.size();
-        logger.info("quickSort size {}: {}", size, list);
-        if (size <= 1)
+        logger.info("quickSort size {}", size);
+        logger.info("{}", list);
+        if (size > 1)
         {
-            return;
+            Pair part = partition(list);
+            final int subSize = part.hix + 1;   // list size is one more than high index
+            if (subSize >= 2)           // if partition contains at least 2 elements
+            {
+                quickSort(list.subList(0, subSize));
+            }
+            if (part.lox + 2 < size)    // if partition contains at least 2 elements
+            {
+                quickSort(list.subList(part.lox, size));
+            }
         }
-
-        int part = partition(list);
-        quickSort(list.subList(0, part));
-        quickSort(list.subList(part + 1, size));
+        return list;
     }
 
-    int partition(List<E> list)
+    /**
+     * Partitioning is done via {@link List#subList(int, int)} which is backed by the underlying
+     * collection, so sorting sublists in place automatically sorts the overall list in place.
+     * @param list collection to partition.
+     * @return Pair of indexes around which to partition.
+     */
+    Pair partition(List<E> list)
     {
-        if (list.size() < 2)
-        {
-            logger.info("partition [0]: {}\n", list);
-            return 0;
-        }
-        final int pivin = list.size() / 2;
+        final int size = list.size();
+        assert size >= 2;
+
+        final int pivin = size / 2;
         final E pivot = list.get(pivin);
+        logger.info("pivot [{}]: \"{}\"", pivin, pivot);
 
-        int lo = -1;
-        int hi = list.size();
-
-        logger.debug("pivot [{}]: \"{}\"", pivin, pivot);
-        logger.debug(LOHI + "\n", lo, hi);
-
-        while (true)
+        // set up indices as algorithm understands them
+        int lox = 0;
+        int hix = size- 1;
+        while (lox <= hix)
         {
-            for (E atLo = list.get(++lo); pivot.compareTo(atLo) > 0; atLo = list.get(++lo)) {}
-            for (E atHi = list.get(--hi); pivot.compareTo(atHi) < 0; atHi = list.get(--hi)) {}
-
-            logger.debug(LOHI + ": {\"{}\", \"{}\"}", lo, hi, list.get(lo), list.get(hi));
-            try
+            for (E atLo = list.get(lox); pivot.compareTo(atLo) > 0; atLo = list.get(++lox))
             {
-                if (lo >= hi)
+                logger.debug("[{}]: \"{}\"", lox, atLo);
+            }
+            for (E atHi = list.get(hix); pivot.compareTo(atHi) < 0; atHi = list.get(--hix))
+            {
+                logger.debug("[{}]: \"{}\"", hix, atHi);
+            }
+            logger.info(LOHI, lox, hix);
+            if (lox <= hix)
+            {
+                if (lox < hix)
                 {
-                    logger.info("partition [{}]: {}\n", hi, list);
-                    return hi;
+                    exchange(list, lox, hix);
                 }
-                final E lower = list.get(lo);
-                final E higher = list.get(hi);
-                list.set(lo, higher);
-                list.set(hi, lower);
+                ++lox;
+                --hix;
             }
-            finally
-            {
-                logger.debug("{}\n", list);
-            }
+            logger.info("{}", list);
         }
+        final Pair part = new Pair(lox, hix);
+        logger.info("partition [{}, {}]\n", part.lox, part.hix);
+        return part;
+    }
+
+    /**
+     * Exchange two elements in a list.
+     *
+     * @param list {@code List<E>} within which to exchange items.
+     * @param lox  lower index of item to exchange.
+     * @param hix  higher index of item to exchange.
+     */
+    void exchange(List<E> list, int lox, int hix)
+    {
+        final E lower = list.get(lox);
+        final E higher = list.get(hix);
+        list.set(lox, higher);
+        list.set(hix, lower);
     }
 
     /**
@@ -107,7 +153,8 @@ public class QuickSort<E extends Comparable<E>> implements Sorter<E, List<E>>
      */
     public static void main(String[] args)
     {
-        final String[] stockExample = {"Grant", "Bob", "Ziggy", "Alice", "Frank", "Jo", "Diane"};
+        final String[] stockExample = 
+        {"Grant", "Bob", "Ziggy", "Alice", "teeny", "Frank", "Jo", "Diane", "Phil", "", };
 
         final List<String> strangs = Arrays.asList(args.length == 0 ? stockExample : args);
         QuickSort<String> strangSorter = new QuickSort<>();
