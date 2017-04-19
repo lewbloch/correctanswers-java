@@ -15,23 +15,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'>
-<suite name="Swapper Tests">
-  <test name="XOR Swapper Test" >
+<suite name="Tree Suite">
+  <test name="Binary Tree Test">
     <classes>
-       <class name="com.lewscanon.lessons.swapper.swappers.XorSwapperNGTest" />
+      <class name="com.lewscanon.lessons.algorithms.graphs.BinaryTreeNGTest" />
     </classes>
   </test>
-
-  <test name="Plus Swapper Test" >
-    <classes>
-       <class name="com.lewscanon.lessons.swapper.swappers.PlusSwapperNGTest" />
-    </classes>
-  </test>
-
-  <test name="Times Swapper Test" >
-    <classes>
-       <class name="com.lewscanon.lessons.swapper.swappers.TimesSwapperNGTest" />
-    </classes>
-  </test>
-
 </suite>

@@ -16,9 +16,9 @@ limitations under the License.
 -->
 <!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'>
 <suite name="Swapper Suite">
-  <test name="Swapper Tests" >
+  <test name="Swapper Tests">
     <classes>
-       <class name="SwapperNGTest" />
+      <class name="com.lewscanon.lessons.swapper.swappers.XorSwapperNGTest" />
     </classes>
   </test>
 </suite>

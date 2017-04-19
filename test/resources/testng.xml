@@ -18,7 +18,7 @@ limitations under the License.
 <suite name="Swapper Suite">
   <test name="Swapper Tests">
     <classes>
-      <class name="XorSwapperNGTest" />
+      <class name="com.lewscanon.lessons.algorithms.graphs.BinaryTreeNGTest" />
     </classes>
   </test>
 </suite>
