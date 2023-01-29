@@ -49,14 +49,14 @@ limitations under the License.
 -->
 
   <properties>
-    <apache.logging.log4j>2.8.2</apache.logging.log4j>
+    <apache.logging.log4j>latest</apache.logging.log4j>
     <maven.version>3.3.9</maven.version>
     <maven.compiler.plugin>3.5.1</maven.compiler.plugin>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.surefire.plugin>2.19.1</maven.surefire.plugin>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <testng>7.6.1</testng>
+    <testng>7.6.0</testng>
   </properties>
 
   <dependencies>
@@ -128,8 +128,8 @@ limitations under the License.
           <fork>true</fork>
           <maxmem>256m</maxmem>
           <meminitial>256m</meminitial>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
+          <source>16</source>
+          <target>16</target>
         </configuration>
       </plugin>
 
@@ -155,6 +155,7 @@ limitations under the License.
 
   <profiles>
     <profile>
+      <id>testng-profile</id>
       <build>
         <plugins>
           <plugin>
