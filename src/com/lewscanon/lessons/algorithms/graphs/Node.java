@@ -15,8 +15,8 @@
  */
 package com.lewscanon.lessons.algorithms.graphs;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import com.lewscanon.lessons.algorithms.Kayload;
 
@@ -30,7 +30,7 @@ public class Node<K extends Comparable<K>, P> implements Kayload<K, P>
 {
     private static final String ILLEGAL_KEY = "Null key not allowed";
 
-    protected final Logger logger = LogManager.getLogger(getClass());
+    protected final Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     protected final K key;
     protected P payload;
@@ -62,11 +62,13 @@ public class Node<K extends Comparable<K>, P> implements Kayload<K, P>
         if (key == null)
         {
             IllegalArgumentException exc = new IllegalArgumentException(ILLEGAL_KEY);
-            logger.error(ILLEGAL_KEY, exc);
+            logger.log(Level.SEVERE, ILLEGAL_KEY, exc);
             throw exc;
         }
         this.key = key;
         this.payload = payload;
+
+        //noinspection ConstantValue
         assert this.key != null;
     }
 

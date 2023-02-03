@@ -17,3 +17,7 @@ nbbuild.xml
 /nbproject/
 /dist/
 /target/
+
+#
+.idea/
+build.xml

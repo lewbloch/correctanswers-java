@@ -16,17 +16,14 @@
 package com.lewscanon.lessons.swapper.swappers;
 
 import java.lang.reflect.Method;
-
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.lewscanon.lessons.swapper.Swapper;
 
 import static com.lewscanon.lessons.swapper.Swapper.Pair;
 
 /**
  * Data providers available to all.
- *
  * Instantiate to use - this allows local data providers to fully control what happens.
  */
 public class Provider
@@ -38,11 +35,11 @@ public class Provider
     /**
      * Constructor.
      *
-     * @param logger {@link Logger} with default being one for {@link DataProviders}.
+     * @param logger {@link Logger} with default being one for {@code DataProviders}.
      */
     public Provider(Logger logger)
     {
-        this.logger = logger == null ? LogManager.getLogger(getClass().getSimpleName()) : logger;
+        this.logger = logger == null ? Logger.getLogger(getClass().getSimpleName()) : logger;
         assert this.logger != null;
     }
 
@@ -54,11 +51,12 @@ public class Provider
      */
     public Object[][] provideData(Method test)
     {
-        if (logger.isDebugEnabled())
+        if (logger.isLoggable(Level.FINE))
         {
             final String message = String.format(ENTRY_MSG, "provideData", test.getName());
-            logger.debug(message);
+            logger.fine(message);
         }
+        @SuppressWarnings("UnnecessaryLocalVariable")
         final Object[][] data = new Object[][]
         {
             { new Pair(17, 89) },

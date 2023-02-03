@@ -15,8 +15,8 @@
  */
 package com.lewscanon.lessons.algorithms.graphs;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Binary tree operations.
@@ -28,7 +28,7 @@ public class BinaryTree<K extends Comparable<K>, P> implements Tree<K, P>
 {
     private static final String ILLEGAL_ARGUMENT = "Illegal argument %s: must not be null";
 
-    protected final Logger logger = LogManager.getLogger(getClass());
+    protected final Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     Node<K, P> root;
 
@@ -123,7 +123,7 @@ public class BinaryTree<K extends Comparable<K>, P> implements Tree<K, P>
      * @param probe Node beneath which to insert a new node. If {@code null}, set the root.
      * @param key Key to insert. May not be {@code null}.
      * @param payload Payload to insert. May be {@code null}.
-     * @return 
+     * @return Node inserted.
      */
     Node<K, P> insert(Node<K, P> probe, K key, P payload)
     {
@@ -131,7 +131,7 @@ public class BinaryTree<K extends Comparable<K>, P> implements Tree<K, P>
         {
             final String msg = String.format(ILLEGAL_ARGUMENT, "key");
             IllegalArgumentException exc = new IllegalArgumentException(msg);
-            logger.error(msg, exc);
+            logger.log(Level.SEVERE, msg, exc);
             throw exc;
         }
         if (probe == null)
@@ -139,7 +139,9 @@ public class BinaryTree<K extends Comparable<K>, P> implements Tree<K, P>
              setRoot(new Node<>(key, payload));
              return getRoot();
         }
+        //noinspection ConstantValue
         assert key != null && probe != null;
+
         for (int compared; (compared = key.compareTo(probe.getKey())) != 0;)
         {
             Node<K, P> parent = probe;

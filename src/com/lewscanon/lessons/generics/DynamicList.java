@@ -2,7 +2,6 @@
 package com.lewscanon.lessons.generics;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * Implement a dynamic list similar to Java's {@link java.util.ArrayList}.
@@ -10,12 +9,21 @@ import java.util.function.Predicate;
  *
  * @param <T> the base type.
  */
+@SuppressWarnings({"unchecked", "unused"})
 public class DynamicList<T>
         implements List<T>,  Iterable<T>, RandomAccess {
+
     /** Default capacity. Package-private for testing purposes. */
     static final int DEFAULT_CAPACITY = 16;
 
-    private Object[] internalList;
+    static final int THRESHOLD_PINK = Integer.MAX_VALUE / 2;
+    static final int THRESHOLD_RED = THRESHOLD_PINK + THRESHOLD_PINK / 2;
+    static final int THRESHOLD_YELLOW = THRESHOLD_PINK - THRESHOLD_PINK / 3;
+    static final String TOO_LARGE =
+            "List size has reached capacity of " + THRESHOLD_RED + " items";
+    static final String TOO_NEGATIVE = "List size has dropped below zero";
+
+    private T[] internalList;
     private volatile int top = 0;
 
     /**
@@ -30,7 +38,8 @@ public class DynamicList<T>
      * @param initialCapacity initial capacity.
      */
     public DynamicList(int initialCapacity) {
-        this.internalList = new Object[initialCapacity];
+        //noinspection unchecked
+        this.internalList = (T[]) new Object[initialCapacity];
     }
 
     @Override
@@ -50,38 +59,46 @@ public class DynamicList<T>
         for (int idx = 0; !found && idx < top; ++idx) {
             found = Objects.equals(query, internalList[idx]);
         }
-
         return found;
     }
 
     @Override
     public Iterator<T> iterator() {
-        final Object[] copy;
+        final T[] copy;
         synchronized (this) {
             copy = Arrays.copyOf(internalList, top);
         }
-        //noinspection unchecked
-        Iterator<T> iter = (Iterator<T>) Arrays.stream(copy).iterator();
-        return iter;
+        return Arrays.stream(copy).iterator();
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        final T[] copy;
+        synchronized (this) {
+            copy = Arrays.copyOf(internalList, top);
+        }
+        return copy;
     }
 
     @Override
-    public <T1> T1[] toArray(T1[] a) {
-        return a;
+    public <T1> T1[] toArray(T1[] proto) {
+        final Object[] copy = toArray();
+        return (T1[]) copy;
     }
 
     @Override
-    public boolean add(T t) {
-        return false;
+    public synchronized boolean add(T t) {
+        if (top == internalList.length) {
+           if (! upCap()) {
+               return false;
+           }
+        }
+        internalList[top++] = t;
+        return true;
     }
 
     @Override
-    public boolean remove(Object o) {
+    public synchronized boolean remove(Object o) {
         return false;
     }
 
@@ -111,33 +128,39 @@ public class DynamicList<T>
     }
 
     @Override
-    public void clear() {
-
+    public synchronized void clear() {
+        this.internalList = (T[]) new Object[DEFAULT_CAPACITY];
     }
 
     @Override
-    public T get(int index) {
+    public synchronized T get(int index) {
+        return index < 0 || index >= top ? null : internalList[index];
+    }
+
+    @Override
+    public synchronized T set(int index, T element) {
         return null;
     }
 
     @Override
-    public T set(int index, T element) {
+    public synchronized void add(int index, T element) {
+
+    }
+
+    @Override
+    public synchronized T remove(int index) {
         return null;
     }
 
     @Override
-    public void add(int index, T element) {
-
-    }
-
-    @Override
-    public T remove(int index) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
+    public int indexOf(Object search) {
+        T query = (T) search;
+        for (int idx = 0; idx < top; ++idx) {
+            if (Objects.equals(query, internalList[idx])) {
+                return idx;
+            }
+        }
+        return -1;
     }
 
     @Override
@@ -147,16 +170,54 @@ public class DynamicList<T>
 
     @Override
     public ListIterator<T> listIterator() {
-        return null;
+        final T[] copy;
+        synchronized (this) {
+            copy = Arrays.copyOf(internalList, top);
+        }
+        return Arrays.asList(copy).listIterator();
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        return null;
+        if (index > top) {
+            throw new IllegalArgumentException("Index " + index + " must be less than " + index);
+        }
+        if (index < 0) {
+            throw new IllegalArgumentException("Index " + index + " must be at least zero");
+        }
+        throw new UnsupportedOperationException("listIterator()");
     }
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        return null;
+        final T[] sub = Arrays.copyOfRange(internalList,
+                Math.max(0, fromIndex), Math.min(toIndex, top));
+        return Arrays.asList(sub);
+    }
+
+    synchronized boolean upCap() {
+        final int capacity = internalList.length;
+        if (capacity >= THRESHOLD_RED) {
+            return false;
+        }
+        final int newlen = capacity >= THRESHOLD_PINK ?
+                THRESHOLD_RED : (capacity + capacity / 2);
+        internalList = Arrays.copyOf(internalList, newlen);
+        return true;
+    }
+
+    synchronized boolean downCap() {
+        assert internalList.length >= DEFAULT_CAPACITY;
+        assert top >= 0 : TOO_NEGATIVE;
+
+        if (internalList.length == DEFAULT_CAPACITY) {
+            return true;
+        }
+
+        final int capacity = top + top / 2;
+        if (capacity < internalList.length) {
+            internalList = Arrays.copyOf(internalList, capacity);
+        }
+        return true;
     }
 }

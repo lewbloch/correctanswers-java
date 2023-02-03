@@ -15,12 +15,8 @@
  */
 package com.lewscanon.lessons.swapper.swappers;
 
-import com.lewscanon.lessons.swapper.swappers.XorSwapper;
-
 import java.lang.reflect.Method;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.logging.Logger;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -36,7 +32,7 @@ public class XorSwapperNGTest
 {
     private static final String DATAP = "provider";
 
-    private final Logger logger = LogManager.getLogger(getClass().getSimpleName());
+    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
     private final Provider provider = new Provider(logger);
 
     /**

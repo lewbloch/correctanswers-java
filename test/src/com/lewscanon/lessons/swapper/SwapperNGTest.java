@@ -15,21 +15,16 @@
  */
 package com.lewscanon.lessons.swapper;
 
-import com.lewscanon.lessons.swapper.Swapper;
+import com.lewscanon.lessons.swapper.Swapper.Pair;
+import com.lewscanon.lessons.swapper.swappers.Provider;
+import com.lewscanon.lessons.swapper.swappers.XorSwapper;
 
-import java.lang.reflect.Method;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-import com.lewscanon.lessons.swapper.Swapper.Pair;
-import com.lewscanon.lessons.swapper.swappers.PlusSwapper;
-import com.lewscanon.lessons.swapper.swappers.Provider;
-import com.lewscanon.lessons.swapper.swappers.TimesSwapper;
-import com.lewscanon.lessons.swapper.swappers.XorSwapper;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.testng.Assert.assertEquals;
 
@@ -45,7 +40,7 @@ public class SwapperNGTest
     // Date
     private static final String DATAP = "provider";
 
-    private final Logger logger = LogManager.getLogger(getClass().getSimpleName());
+    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
     private final Provider provider = new Provider(logger);
 
     private final Swapper swapper;
@@ -62,10 +57,12 @@ public class SwapperNGTest
         {
             final IllegalArgumentException exc =
                     new IllegalArgumentException(BAD_SWAPPER, new NullPointerException());
-            logger.error(BAD_SWAPPER, exc.getCause());
+            logger.log(Level.SEVERE, BAD_SWAPPER, exc.getCause());
             throw exc;
         }
         this.swapper = swapper;
+
+        //noinspection ConstantValue
         assert this.swapper != null : BAD_SWAPPER;
     }
 

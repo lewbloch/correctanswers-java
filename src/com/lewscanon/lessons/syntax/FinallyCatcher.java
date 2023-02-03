@@ -3,6 +3,7 @@
  */
 package com.lewscanon.lessons.syntax;
 
+/** Elucidate try-catch-finally behavior. */
 public class FinallyCatcher {
     /**
      * Demonstrate try-catch-finally.

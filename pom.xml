@@ -33,7 +33,7 @@ limitations under the License.
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
       <!--<distribution></distribution>-->
       <comments>Copyright 2016, Lewis S. Bloch.</comments>
     </license>
@@ -49,36 +49,21 @@ limitations under the License.
 -->
 
   <properties>
-    <apache.logging.log4j>latest</apache.logging.log4j>
     <maven.version>3.3.9</maven.version>
     <maven.compiler.plugin>3.5.1</maven.compiler.plugin>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.surefire.plugin>2.19.1</maven.surefire.plugin>
+    <testng.version>7.7.0</testng.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <testng>7.6.0</testng>
   </properties>
 
   <dependencies>
-    <!-- logging -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>${apache.logging.log4j}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>${apache.logging.log4j}</version>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- TestNG -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>${testng}</version>
+      <version>${testng.version}</version>
       <scope>test</scope>
     </dependency>
 

@@ -18,9 +18,7 @@ package com.lewscanon.lessons.algorithms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.logging.Logger;
 
 /**
  * Quicksort {@link Sorter}.
@@ -29,23 +27,16 @@ import org.apache.logging.log4j.Logger;
  */
 public class QuickSorter<E extends Comparable<E>> implements Sorter<E, List<E>>
 {
-    private static final String LOHI = "{[{}], [{}]}";
-
-    /** Pair of indexes. */
-    static class Pair
-    {
-        /** "Low" index. */
-        final int lox;
-        /** "High" index. */
-        final int hix;
-        Pair(int lox, int hix)
-        {
-            this.lox = lox;
-            this.hix = hix;
-        }
+    /**
+     * Pair of indexes.
+     *
+     * @param lox "Low" index.
+     * @param hix "High" index.
+     */
+    record Pair(int lox, int hix) {
     }
 
-    final Logger logger = LogManager.getLogger(getClass());
+    final Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     /**
      * Sort a list in place.
@@ -69,8 +60,9 @@ public class QuickSorter<E extends Comparable<E>> implements Sorter<E, List<E>>
     public List<E> quickSort(List<E> list)
     {
         final int size = list.size();
-        logger.debug("size {}", size);
-        logger.info("{}", list);
+        logger.info("size " + size);
+        logger.info(String.format("%s", list));
+
         if (size > 1)
         {
             Pair part = partition(list);
@@ -100,20 +92,22 @@ public class QuickSorter<E extends Comparable<E>> implements Sorter<E, List<E>>
 
         final int pivin = size / 2;
         final E pivot = list.get(pivin);
-        logger.debug("pivot [{}]: \"{}\"", pivin, pivot);
+        logger.info(String.format("pivot [%s]: \"%s\"", pivin, pivot));
 
         // set up indices as algorithm understands them
         int lox = 0;
         int hix = size- 1;
         while (lox <= hix)
         {
-            for (E atLo = list.get(lox); pivot.compareTo(atLo) > 0; atLo = list.get(++lox))
+            for (E atLo = list.get(lox); pivot.compareTo(atLo) > 0;)
             {
+                atLo = list.get(++lox);
             }
-            for (E atHi = list.get(hix); pivot.compareTo(atHi) < 0; atHi = list.get(--hix))
+            for (E atHi = list.get(hix); pivot.compareTo(atHi) < 0;)
             {
+                atHi = list.get(--hix);
             }
-            logger.debug(LOHI, lox, hix);
+            logger.fine(String.format("{[%d], [%d]}", lox, hix));
             if (lox <= hix)
             {
                 if (lox < hix)
@@ -123,10 +117,10 @@ public class QuickSorter<E extends Comparable<E>> implements Sorter<E, List<E>>
                 ++lox;
                 --hix;
             }
-            logger.info("{}", list);
+            logger.info(String.format("%s", list));
         }
         final Pair part = new Pair(lox, hix);
-        logger.debug("partition [{}, {}]", part.lox, part.hix);
+        logger.fine(String.format("partition [%s, %s]", part.lox, part.hix));
         return part;
     }
 

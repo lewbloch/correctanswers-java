@@ -15,6 +15,8 @@
  */
 package com.lewscanon.lessons.algorithms.graphs;
 
+import java.util.logging.Level;
+
 import static com.lewscanon.lessons.algorithms.graphs.RBNode.Color.BLACK;
 import static com.lewscanon.lessons.algorithms.graphs.RBNode.Color.RED;
 
@@ -24,6 +26,7 @@ import static com.lewscanon.lessons.algorithms.graphs.RBNode.Color.RED;
  * @param <K> Key type.
  * @param <P> Payload type.
  */
+@SuppressWarnings({"RedundantIfStatement", "unused"})
 public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
 {
     private static final String ILLEGAL_COLOR = "Null color not allowed";
@@ -33,10 +36,9 @@ public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
     {
         /** RED node. */    RED,
         /** BLACK node. */  BLACK,
-        ;
     }
 
-    /** {@code false} for {@link RED}, {@code true} for {@link BLACK}. */
+    /** {@code false} for {@code Color.RED}, {@code true} for {@code Color.BLACK}. */
     private boolean color;
 
     /**
@@ -81,15 +83,15 @@ public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
         if (color == null)
         {
             IllegalArgumentException exc = new IllegalArgumentException(ILLEGAL_COLOR);
-            logger.error(ILLEGAL_COLOR, exc);
+            logger.log(Level.SEVERE, ILLEGAL_COLOR, exc);
             throw exc;
         }
         this.color = color == BLACK;
     }
 
     /**
-     * Test if the node color is {@link BLACK}.
-     * @return true iff the node color is {@link BLACK}.
+     * Test if the node color is {@code BLACK}.
+     * @return true iff the node color is {@code BLACK}.
      */
     public boolean isBlack()
     {
@@ -97,7 +99,7 @@ public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
     }
 
     /**
-     * Set the node color to {@link BLACK}.
+     * Set the node color to {@code BLACK}.
      */
     public void makeBlack()
     {
@@ -105,8 +107,8 @@ public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
     }
 
     /**
-     * Test if the node color is {@link RED}.
-     * @return true iff the node color is {@link RED}.
+     * Test if the node color is {@code RED}.
+     * @return true iff the node color is {@code RED}.
      */
     public boolean isRed()
     {
@@ -114,7 +116,7 @@ public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
     }
 
     /**
-     * Set the node color to {@link RED}.
+     * Set the node color to {@code RED}.
      */
     public void makeRed()
     {
@@ -123,7 +125,7 @@ public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
 
     /**
      * Rotate the given node to the right.
-     * @param probe {@link Node} to rotate.
+     * @param probe {@code Node} to rotate.
      * @return Node<K, P> the rotated node, or {@code null} if none.
      */
     public Node<K, P> rotateRight(Node<K, P> probe)
@@ -138,7 +140,7 @@ public class RBNode<K extends Comparable<K>, P> extends Node<K, P>
     /**
      * Rotate the given node to the left.
      *
-     * @param probe {@link Node} to rotate.
+     * @param probe {@code Node} to rotate.
      * @return Node<K, P> the rotated node, or {@code null} if none.
      */
     public Node<K, P> rotateLeft(Node<K, P> probe)
