@@ -19,5 +19,6 @@ nbbuild.xml
 /target/
 
 #
-.idea/
+.idea*/
 build.xml
+*.iml

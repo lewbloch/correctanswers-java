@@ -30,5 +30,14 @@ public class Unsignatory {
         System.out.printf("-0x6f00%n     = \\x%x %d %d  '%c'%n",
                 (int) asChar, (int) asChar, asInt, asChar);
 
+        char a = 'a';
+        char b = 98;
+        int ab= a+b;
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(ab);
+        char ch = (char) 130000;
+        int ich = ch;
+        System.out.printf("ch = (char) 130000 == %c (%d, %x)%n", ch, ich, ich);
     }
 }
