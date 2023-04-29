@@ -11,6 +11,7 @@ public class CharaMath {
     char a = 'a';
     char b = 'b';
     char ab = (char) (a + b);
-    System.out.printf("a: '%c', b: '%c', ab: '%c', equals 'Ã'? %b%n", a, b, ab, ab == 'Ã');
+    System.out.printf("a: '%c', b: '%c', ab: '%c', equals 'Ã'? %b%n",
+            a, b, ab, ab == 'Ã');
   }
 }
