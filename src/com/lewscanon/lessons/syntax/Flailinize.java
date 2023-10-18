@@ -4,8 +4,16 @@
 
 package com.lewscanon.lessons.syntax;
 
-@SuppressWarnings({"removal", "StringOperationCanBeSimplified", "JoinDeclarationAndAssignmentJava"})
+@SuppressWarnings({
+        "JoinDeclarationAndAssignmentJava",
+        "ReassignedVariable",
+        "ReuseOfLocalVariable",
+        "StringOperationCanBeSimplified",
+        "removal",
+        "unused",
+})
 public class Flailinize {
+    @SuppressWarnings("UnusedAssignment")
     public static void main(String[] args) throws InterruptedException {
         String str = new String("Java Developers Community");
         str = null;
