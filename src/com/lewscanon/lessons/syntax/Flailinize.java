@@ -4,6 +4,7 @@
 
 package com.lewscanon.lessons.syntax;
 
+@SuppressWarnings({"removal", "StringOperationCanBeSimplified", "JoinDeclarationAndAssignmentJava"})
 public class Flailinize {
     public static void main(String[] args) throws InterruptedException {
         String str = new String("Java Developers Community");
