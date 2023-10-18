@@ -11,7 +11,7 @@ package com.lewscanon.lessons.syntax;
         "StringOperationCanBeSimplified",
         "removal",
         "unused",
-})
+        "TooBroadScope", })
 public class Flailinize {
     @SuppressWarnings("UnusedAssignment")
     public static void main(String[] args) throws InterruptedException {
