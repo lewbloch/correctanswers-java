@@ -9,16 +9,17 @@ package com.lewscanon.lessons.syntax;
         "ReassignedVariable",
         "ReuseOfLocalVariable",
         "StringOperationCanBeSimplified",
+        "TooBroadScope",
+        "UnusedAssignment",
         "removal",
         "unused",
-        "TooBroadScope", })
+})
 public class Flailinize {
-    @SuppressWarnings("UnusedAssignment")
     public static void main(String[] args) throws InterruptedException {
         String str = new String("Java Developers Community");
         str = null;
         System.gc();
-        Thread.sleep(1000);
+        Thread.sleep(1000L);
         System.out.println("main");
     }
 
