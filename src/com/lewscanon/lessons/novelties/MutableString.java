@@ -119,7 +119,7 @@ public class MutableString implements Appendable, CharSequence, Comparable<Mutab
     }
 
     @Override
-    public CharSequence subSequence(int start, int end) {
+    public MutableString subSequence(int start, int end) {
         return new MutableString(builder.subSequence(start, end));
     }
 
