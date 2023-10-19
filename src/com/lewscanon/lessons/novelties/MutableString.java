@@ -1,5 +1,17 @@
 package com.lewscanon.lessons.novelties;
 
+/**
+ * Why does {@code String.concat} not mutate its argument?<br>
+ * Despite rumor, the reason is not immutability of the {@code String}
+ * argument but the definition of {@code concat} itself.
+ * {@code concat} simply is defined to return its result. It does not
+ * consider the mutability of its argument.<br>
+ * If mutabiliy of the argument were the reason, then {@code concat}
+ * would be required to change the value of its argument if it could.
+ * <br>It is not.<br>
+ * Here is a mutable {@code string}ish type with a {@code concat} that
+ * does not mutate its argument.
+ */
 public class MutableString implements Appendable, CharSequence, Comparable<MutableString> {
     private final StringBuilder builder;
 
