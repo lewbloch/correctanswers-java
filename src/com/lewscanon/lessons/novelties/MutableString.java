@@ -6,11 +6,11 @@ package com.lewscanon.lessons.novelties;
  * argument but the definition of {@code concat} itself.
  * {@code concat} simply is defined to return its result. It does not
  * consider the mutability of its argument.<br>
- * If mutabiliy of the argument were the reason, then {@code concat}
+ * If mutability of the argument were the reason, then {@code concat}
  * would be required to change the value of its argument if it could.
  * <br>It is not.<br>
- * Here is a mutable {@code string}ish type with a {@code concat} that
- * does not mutate its argument.
+ * Here is a mutable string type with a {@code concat} that does
+ * not mutate its argument.
  */
 public class MutableString implements Appendable, CharSequence, Comparable<MutableString> {
     private final StringBuilder builder;
@@ -120,11 +120,11 @@ public class MutableString implements Appendable, CharSequence, Comparable<Mutab
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        return builder.subSequence(start, end);
+        return new MutableString(builder.subSequence(start, end));
     }
 
     @Override public boolean equals(Object another) {
-        return another instanceof MutableString other && this.builder.compareTo(other.builder) == 0;
+        return another instanceof MutableString other && compareTo(other) == 0;
     }
 
     @Override
