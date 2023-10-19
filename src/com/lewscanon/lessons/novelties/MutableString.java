@@ -129,7 +129,7 @@ public class MutableString implements Appendable, CharSequence, Comparable<Mutab
 
     @Override
     public int compareTo(MutableString other) {
-        return other == null ? 1 : this.builder.compareTo(other.builder);
+        return other == null ? 1 : other == this ? 0 : this.builder.compareTo(other.builder);
     }
 
     @Override
