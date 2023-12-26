@@ -6,7 +6,7 @@ import java.util.Vector;
 
 /** Proof that java.util.Vector is not thread safe. */
 public class UnsafeListing {
-    static final long SLEEPFOR = 67L;
+    static final long SLEEPFOR = 66L;
 
     private final List<String> listings = new Vector<>(); // bad!
 
