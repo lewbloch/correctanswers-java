@@ -4,6 +4,7 @@ package com.lewscanon.lessons.syntax;
 public class CharaMath {
   public static void main(String... args) {
     charAddendum();
+    charAdditum();
     charOver();
 
     @SuppressWarnings("UnnecessaryLocalVariable")
@@ -20,6 +21,13 @@ public class CharaMath {
     System.out.printf(
       "a: '%c', b: '%c', ab: '%c', equals 'Ã'? %b%n",
       a, b, ab, ab == 'Ã');
+  }
+
+  public static void charAdditum() {
+    int i = 10;
+    int j = 25;
+    System.out.print("charAdditum: ");
+    System.out.println(i + ' ' + j);
   }
 
   public static void charOver() {

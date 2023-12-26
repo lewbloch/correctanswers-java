@@ -1,4 +1,4 @@
-package com.lewscanon.lessons.syntax;
+package com.lewscanon.lessons.syntax.mathing;
 
 public class BadDivision {
     public static int divide(int dividend, int divisor) throws ArithmeticException {

@@ -1,4 +1,4 @@
-package com.lewscanon.lessons.syntax;
+package com.lewscanon.lessons.syntax.utiling;
 
 import java.util.ArrayList;
 import java.util.List;

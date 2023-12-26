@@ -1,4 +1,4 @@
-package com.lewscanon.lessons.syntax;
+package com.lewscanon.lessons.syntax.utiling;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
