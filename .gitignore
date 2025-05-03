@@ -20,5 +20,6 @@ nbbuild.xml
 
 #
 .idea*/
+scratch/
 build.xml
 *.iml
