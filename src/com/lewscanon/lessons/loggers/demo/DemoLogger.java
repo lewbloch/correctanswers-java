@@ -8,6 +8,6 @@ import static com.lewscanon.lessons.loggers.LogSystem.LOGSYSTEM;
 public class DemoLogger {
     public static void main(String[] args) {
         Logger logger = Logger.getLogger(LOGSYSTEM.toString());
-        logger.log(Level.WARNING, "Logging with logger(\"{0}\")", logger.getName());
+        logger.log(Level.WARNING, "Logging with Logger(\"{0}\")", logger.getName());
     }
 }
